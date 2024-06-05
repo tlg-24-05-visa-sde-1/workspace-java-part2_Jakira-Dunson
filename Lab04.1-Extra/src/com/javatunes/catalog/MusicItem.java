@@ -11,13 +11,11 @@ package com.javatunes.catalog;
 import java.sql.Date;
 
 /**
- * An item for sale in the JavaTunes catalog.
- * The 'id' property is treated as a "primary key:"
- * - equals() and hashCode() are both based solely on id.
- * - Comparable is based on id, also -> natural order defined by increasing id.
+ * An item for sale in the JavaTunes catalog. The 'id' property is treated as a "primary key:" -
+ * equals() and hashCode() are both based solely on id. - Comparable is based on id, also -> natural
+ * order defined by increasing id.
  */
-public class MusicItem
-implements Comparable<MusicItem> {
+public class MusicItem implements Comparable<MusicItem> {
     private Long id;
     private String title;
     private String artist;
@@ -29,7 +27,13 @@ implements Comparable<MusicItem> {
         this.id = id;
     }
 
-    public MusicItem(Long id, String title, String artist, Date releaseDate, Double price, MusicCategory musicCategory) {
+    public MusicItem(
+            Long id,
+            String title,
+            String artist,
+            Date releaseDate,
+            Double price,
+            MusicCategory musicCategory) {
         this(id);
         setTitle(title);
         setArtist(artist);
@@ -38,7 +42,13 @@ implements Comparable<MusicItem> {
         setMusicCategory(musicCategory);
     }
 
-    public MusicItem(Long id, String title, String artist, String releaseDate, Double price, MusicCategory musicCategory) {
+    public MusicItem(
+            Long id,
+            String title,
+            String artist,
+            String releaseDate,
+            Double price,
+            MusicCategory musicCategory) {
         this(id, title, artist, Date.valueOf(releaseDate), price, musicCategory);
     }
 
@@ -106,19 +116,26 @@ implements Comparable<MusicItem> {
         return id.hashCode();
     }
 
-    @Override  // interface Comparable
+    @Override // interface Comparable
     public int compareTo(MusicItem other) {
         return this.getId().compareTo(other.getId());
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() +
-                " (id=" + getId() +
-                ", title=" + getTitle() +
-                ", artist=" + getArtist() +
-                ", releaseDate=" + getReleaseDate() +
-                ", price=" + getPrice() +
-                ", musicCategory=" + getMusicCategory() + ")";
+        return getClass().getSimpleName()
+                + " (id="
+                + getId()
+                + ", title="
+                + getTitle()
+                + ", artist="
+                + getArtist()
+                + ", releaseDate="
+                + getReleaseDate()
+                + ", price="
+                + getPrice()
+                + ", musicCategory="
+                + getMusicCategory()
+                + ")";
     }
 }

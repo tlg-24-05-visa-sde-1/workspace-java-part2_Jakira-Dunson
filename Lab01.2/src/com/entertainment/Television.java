@@ -58,6 +58,7 @@ public class Television {
 
         // this is a "scientifically correct" hash function, i.e.,
         // it minimizes the probability of hash collisions
+        //this combines the hash codes from brand and volume and combines it as one
         return Objects.hash(getBrand(), getVolume());
     }
 

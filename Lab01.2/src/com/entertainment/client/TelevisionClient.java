@@ -11,7 +11,7 @@ class TelevisionClient {
 
         // examine == and the equals() method
         Television tvA = new Television("Sony", 50);
-        Television tvB = new Television("Sony", 50);
+        Television tvB = new Television("LG", 50);
 
         System.out.println(tvA.hashCode());
         System.out.println(tvB.hashCode());

@@ -67,7 +67,8 @@ public class Television {
     public boolean equals(Object obj) {
         boolean result = false;
         // check that 'obj' is really referring to a Television object
-        if (obj instanceof Television) {
+        //if (obj instanceof Television) {This is a IS -A  check
+        if (this.getClass() == obj.getClass()) { //are we the exact same type
             //If obj is an instance of Television, we cast obj to a Television type and assign it to a new variable other.
             // This allows us to access Television-specific methods and fields.
             // downcast 'obj' to more specific reference type Television, for getName(), getAge()

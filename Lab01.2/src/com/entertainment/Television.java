@@ -65,20 +65,24 @@ public class Television {
     @Override
     public boolean equals(Object obj) {
         boolean result = false;
-
         // check that 'obj' is really referring to a Television object
         if (obj instanceof Television) {
+            //If obj is an instance of Television, we cast obj to a Television type and assign it to a new variable other.
+            // This allows us to access Television-specific methods and fields.
             // downcast 'obj' to more specific reference type Television, for getName(), getAge()
             Television other = (Television) obj;
 
             // do the checks: business equality is defined as brand, volume
+            //the current object is the 'this' the other obj is the 'other'
+            //Objects.equals(this.getBrand(), other.getBrand()): This checks if the brand of both televisions are equal.
+            // The Objects.equals method is used for a null-safe check (i.e., it handles cases where either or both brands might be null).
+            //this.getVolume() == other.getVolume(): This checks if the volume of both televisions are equal.
+            // Since volume is likely a primitive type (e.g., int), it cannot be null.
             result = Objects.equals(this.getBrand(), other.getBrand()) &&  // null-safe check
                     this.getVolume() == other.getVolume();                // primitives can't be null
         }
-
         return result;
     }
-
 
     // toString()
     @Override

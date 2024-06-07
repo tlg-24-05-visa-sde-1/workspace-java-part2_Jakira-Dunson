@@ -23,7 +23,7 @@ class TelevisionClient {
 
 
         /*
-        * Television did not have natural order Treeset would not be happy and exception is trown
+        * Television did not have natural order TreeSet would not be happy and exception is trown
         *
         * HashSet has no order
         * LinkedHashset has order of things

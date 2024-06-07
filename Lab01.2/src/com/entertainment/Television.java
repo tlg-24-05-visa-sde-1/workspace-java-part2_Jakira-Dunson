@@ -62,7 +62,6 @@ public class Television implements Comparable<Television> {
         // this is a poor hash function, because it easily yields "hash collisions"
         // a "hash collision" is when "different" objects happen to have the same hashcode by dumb luck.
         // return getBrand().length() + getVolume();
-
         // this is a "scientifically correct" hash function, i.e.,
         // it minimizes the probability of hash collisions
         return Objects.hash(getBrand(), getVolume());
@@ -131,8 +130,8 @@ public class Television implements Comparable<Television> {
     public int compareTo(Television other) {
         int result = this.getBrand().compareTo(other.getBrand());
 
-        if (result == 0) { // tied on brand, so break the tie based on volume
-            result = Integer.compare(this.getVolume(), other.getVolume());
+        if (result == 0) { //The 0 means the brands are the same/tied on brand, so break the tie based on volume.
+            result = Integer.compare(this.getVolume(), other.getVolume()); //this reassigns the result
         }
         return result;
     }

@@ -61,12 +61,12 @@ public class Radish implements Comparable<Radish> {
     * */
     @Override
     public int compareTo(Radish other) {
-        return Double.compare(this.getSize(), other.getSize());
+        return Double.compare(this.getSize(), other.getSize());  //makes size the natural order
     }
     //toString
     @Override
     public String toString() {
-        return String.format("Color: %s, Size: %.2f , Tail Length: %.2f, Guys On Top: %s", getColor(), getSize(), getTailLength(), getGuysOnTop());
+        return String.format("Radishes: Color: %s, Size: %.2f , Tail Length: %.2f, Guys On Top: %s", getColor(), getSize(), getTailLength(), getGuysOnTop());
 
     }
 }

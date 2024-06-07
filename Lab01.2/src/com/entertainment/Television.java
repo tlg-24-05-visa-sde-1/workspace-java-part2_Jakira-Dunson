@@ -2,7 +2,13 @@ package com.entertainment;
 
 import java.util.Objects;
 
-public class Television implements Comparable <Television> {
+/*
+ * NOTE: to be consistent with equals, you must use the same sort key(s)
+ * as you're using in your equals() and hashCode() methods.
+ * Natural order is defined by brand (String), and then by volume (int).
+ * when tied on "brand".
+ */
+public class Television implements Comparable<Television> {
 
     // static fields and properties
 
@@ -50,18 +56,37 @@ public class Television implements Comparable <Television> {
         this.volume = volume;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Television that = (Television) o;
-        return getVolume() == that.getVolume() && Objects.equals(getBrand(), that.getBrand());
-    }
 
     @Override
     public int hashCode() {
+        // this is a poor hash function, because it easily yields "hash collisions"
+        // a "hash collision" is when "different" objects happen to have the same hashcode by dumb luck.
+        // return getBrand().length() + getVolume();
+
+        // this is a "scientifically correct" hash function, i.e.,
+        // it minimizes the probability of hash collisions
         return Objects.hash(getBrand(), getVolume());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+
+        // check that 'obj' is really referring to a Television object
+        // if (obj instanceof Television) { // IS-A check
+        if (this.getClass() == obj.getClass()) { // are we the EXACT SAME TYPE?
+
+            // downcast 'obj' to more specific reference type Television, for getName(), getAge()
+            Television other = (Television) obj;
+
+            // do the checks: business equality is defined as brand, volume
+            result = Objects.equals(this.getBrand(), other.getBrand()) &&  // null-safe check
+                    this.getVolume() == other.getVolume();                // primitives can't be null
+        }
+        return result;
+    }
+
+
     //    @Override
 //    public int hashCode() {
 //        // this is a poor hash function, because it easily yields "hash collisions"
@@ -97,9 +122,19 @@ public class Television implements Comparable <Television> {
 //        }
 //        return result;
 //    }
+
+
+    // toCompare()
+
+
     @Override
-    public int compareTo(Television television) {
-        return this.getBrand().compareTo(television.getBrand());
+    public int compareTo(Television other) {
+        int result = this.getBrand().compareTo(other.getBrand());
+
+        if (result == 0) { // tied on brand, so break the tie based on volume
+            result = Integer.compare(this.getVolume(), other.getVolume());
+        }
+        return result;
     }
 
     // toString()

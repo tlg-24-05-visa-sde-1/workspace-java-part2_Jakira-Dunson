@@ -20,6 +20,13 @@ class TelevisionClient {
         System.out.println("tvA.equals(tvB): " + tvA.equals(tvB));
         System.out.println();
 
+
+        /*
+        * Television did not have natural order Treeset would not be happy and exception is trown
+        *
+        *
+        * */
+
         Set<Television> tvs = new TreeSet<>();
         tvs.add(tvA);
         tvs.add(tvB);

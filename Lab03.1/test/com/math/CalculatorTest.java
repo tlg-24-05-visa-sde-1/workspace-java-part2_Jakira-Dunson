@@ -18,4 +18,17 @@ public class CalculatorTest {
         Calculator calc = new Calculator();
         assertEquals(5, calc.add(1, 4));  // expected, actual
     }
+
+    @Test
+    public void testDivide() {
+        Calculator calcu = new Calculator();
+        assertEquals(2.5, calcu.divide(5, 2), .001); //expected, actual, delta 
+    }
+
+    @Test
+    public void testEven(){
+        Calculator calcul = new Calculator();
+        assertTrue(calcul.isEven(10));
+
+    }
 }

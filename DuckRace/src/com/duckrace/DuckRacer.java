@@ -13,16 +13,13 @@ public class DuckRacer {
     //constructors
      public DuckRacer(int id, String name){
          this.id = id;
-         setName(name);
+         setName(name); //call setter in-case you want to validate name
      }
      //business or action methods
     public void win(Reward reward){
          rewards.add(reward);
 
     }
-
-
-
 
      //accessor methods
     public int getId(){

@@ -6,7 +6,7 @@ package com.crisp;
  *
  */
 
-public class Raddish implements Comparable<Raddish> {
+public class Radish implements Comparable<Radish> {
     private String color;
     private double size;
     private double tailLength;
@@ -14,8 +14,7 @@ public class Raddish implements Comparable<Raddish> {
 
 
     //constructor
-
-    public Raddish (String color, double size, double tailLength, int guysOnTop){
+    public Radish(String color, double size, double tailLength, int guysOnTop){
         setColor(color);
         setSize(size);
         setTailLength(tailLength);
@@ -23,7 +22,6 @@ public class Raddish implements Comparable<Raddish> {
     }
 
     //accessor methods
-
     public String getColor() {
         return color;
     }
@@ -62,13 +60,13 @@ public class Raddish implements Comparable<Raddish> {
     * Direct subtraction cannot be done.
     * */
     @Override
-    public int compareTo(Raddish other) {
+    public int compareTo(Radish other) {
         return Double.compare(this.getSize(), other.getSize());
     }
     //toString
     @Override
     public String toString() {
-        return String.format("%s, %.2f, %.2f, %s", getColor(), getSize(), getTailLength(), getGuysOnTop());
+        return String.format("Color: %s, Size: %.2f , Tail Length: %.2f, Guys On Top: %s", getColor(), getSize(), getTailLength(), getGuysOnTop());
 
     }
 }

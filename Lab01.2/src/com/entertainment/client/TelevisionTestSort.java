@@ -11,6 +11,7 @@ package com.entertainment.client;
 import java.util.Arrays;
 import java.util.List;
 import com.entertainment.Television;
+import com.entertainment.TelevisionChannelComparator;
 
 public class TelevisionTestSort {
 
@@ -27,7 +28,7 @@ public class TelevisionTestSort {
         }
         System.out.println();
     
-        /* TODO: uncomment this to test your comparator class
+        // TODO: uncomment this to test your comparator class
         // sort by supplied Comparator and print
         tvList.sort(new TelevisionChannelComparator());
 
@@ -36,7 +37,6 @@ public class TelevisionTestSort {
           System.out.println(tv);
         }
         System.out.println();
-        */
     }
 
     // dataset for testing

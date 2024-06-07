@@ -27,7 +27,7 @@ class TelevisionClient {
         *
         * */
 
-        Set<Television> tvs = new TreeSet<>();
+        Set<Television> tvs = new HashSet<>();
         tvs.add(tvA);
         tvs.add(tvB);
         tvs.add(tvC);

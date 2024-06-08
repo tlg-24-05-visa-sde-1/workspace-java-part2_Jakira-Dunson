@@ -17,6 +17,12 @@ public class EmployeeTest {
         employee = new SalariedEmployee("Nova", Date.valueOf("2017-01-01"));
         employee2 = new SalariedEmployee("Nova", Date.valueOf("2017-01-01"));
     }
+    @Test
+    public void equals_shouldReturnFalse_differentName_sameHireDate() {
+        employee2.setName("Kira");
+        assertNotEquals(employee, employee2);
+        assertFalse(employee.equals(employee2));
+    }
 
     @Test
     public void equals_shouldReturnFalse_sameName_differentHireDate() {

@@ -22,8 +22,15 @@ public class TelevisionTest {
         television = new Television();
     }
 
+    @Test
+    public void changeChannel_shouldStoreValue_validInput_lowerBound()
+    throws Exception{
+        television.changeChannel(1);
+    }
+
     @Test(expected = InvalidChannelException.class)
-    public void changeChannel_shouldThrowIllegalArgumentException_invalidInput_lowerBound(){
+    public void changeChannel_shouldThrowIllegalArgumentException_invalidInput_lowerBound()
+    throws InvalidChannelException {
         television.changeChannel(0);
     }
     @Test(expected = IllegalArgumentException.class)

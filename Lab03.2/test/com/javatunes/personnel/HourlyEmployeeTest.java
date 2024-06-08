@@ -7,6 +7,6 @@ import static org.junit.Assert.*;
 public class HourlyEmployeeTest {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
     }
 }

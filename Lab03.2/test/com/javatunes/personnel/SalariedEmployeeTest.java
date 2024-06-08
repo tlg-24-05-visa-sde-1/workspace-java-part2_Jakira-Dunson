@@ -16,11 +16,11 @@ public class SalariedEmployeeTest {
 
     @Before
     public void setUp()  {
-        salEmp = new SalariedEmployee("Jakira", Date.valueOf("2024-05-07"), 4500.5);
+        salEmp = new SalariedEmployee("Jakira", Date.valueOf("2024-05-07"), 2500.0);
     }
 
     @Test
     public void testPayTaxes() {
-        salEmp.payTaxes();
+        assertEquals(750.0, salEmp.payTaxes(), .001);
     }
 }

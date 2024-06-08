@@ -21,4 +21,10 @@ public class SalariedEmployeeTest {
     public void testPayTaxes() {
         assertEquals(750.0, salariedEmployee.payTaxes(), .001);
     }
+
+    @Test
+    public void testPay() {
+        assertEquals(2500.0, salariedEmployee.pay(), .001);
+
+    }
 }

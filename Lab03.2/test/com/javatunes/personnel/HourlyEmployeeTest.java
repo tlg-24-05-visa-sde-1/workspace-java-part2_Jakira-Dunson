@@ -19,4 +19,9 @@ public class HourlyEmployeeTest {
     public void testPayTaxes() {
         assertEquals(218.75, hourlyEmployee.payTaxes(), 0.001);
     }
+
+    @Test
+    public void testPay() {
+        assertEquals(875.0, hourlyEmployee.pay(), 0.001);
+    }
 }

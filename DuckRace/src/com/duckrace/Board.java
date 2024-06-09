@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /*
  * This is a lookup table of ids to student names.
@@ -42,14 +43,34 @@ import java.util.Map;
 
 class Board {
     private final Map<Integer,String> studentIdMap = loadStudentIdMap();
-    private final Map<Integer,DuckRacer> racerMap  = null;
+    private final Map<Integer,DuckRacer> racerMap  = new TreeMap<>();
+
+    /*
+     * Updates the board (racerMap) by making a DuckRacer win.
+     * This could mean fetvhing an existing DuckRacer form racerMap,
+     * or we might need to  creat a new DuckRacer, put it in the map,
+     * and then make it win.
+     */
+    public void updateBoard(int id, Reward reward){
+        if (racerMap.containsKey(id)){ //fetch existing DuckRacer
+            DuckRacer duckRacer = racerMap.get(id);
+            duckRacer.win(reward);
+        } else { // creates a new DuckRacer
+            DuckRacer racer = new DuckRacer(id,studentIdMap.get(id));
+            racerMap.put(id,racer);
+            racer.win(reward);
+        }
+    }
+    //TESTING PURPOSES  ONLY
+    void dumpRacerMap(){
+        System.out.println(racerMap);
+    }
+
 
     //TESTING PURPOSES ONLY
     void dumpStudentIdMap(){
         System.out.println(studentIdMap);
     }
-
-
     /*
     * Populates studentIdMap from file conf/student-ids.csv
     */

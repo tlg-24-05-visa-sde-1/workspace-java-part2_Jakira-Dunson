@@ -38,7 +38,7 @@ public class DuckRacer {
     }
 
     public Collection<Reward> getRewards() {
-        return Collections.unmodifiableCollection(rewards);
+        return Collections.unmodifiableCollection(rewards); //to not allow cheating to occur
     }
 
     @Override

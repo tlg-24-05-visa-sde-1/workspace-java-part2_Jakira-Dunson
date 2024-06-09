@@ -161,8 +161,6 @@ public class InMemoryCatalog implements Catalog {
         }
         return result;
     }
-
-
     /**
      * TASK: how many items of the specified genre (MusicCategory) do we sell?
      */

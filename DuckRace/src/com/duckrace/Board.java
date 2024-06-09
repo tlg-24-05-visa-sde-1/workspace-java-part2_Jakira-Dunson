@@ -1,5 +1,10 @@
 package com.duckrace;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -36,7 +41,42 @@ import java.util.Map;
  */
 
 class Board {
-    private final Map<Integer,String> studentIdMap = null;
+    private final Map<Integer,String> studentIdMap = loadStudentIdMap();
     private final Map<Integer,DuckRacer> racerMap  = null;
+
+    //TESTING PURPOSES ONLY
+    void dumpStudentIdMap(){
+        System.out.println(studentIdMap);
+    }
+
+
+    /*
+    * Populates studentIdMap from file conf/student-ids.csv
+    */
+
+    private Map<Integer, String> loadStudentIdMap() {
+        Map<Integer, String> idMap = new HashMap<>();
+
+        try {
+            List<String> lines = Files.readAllLines(Path.of("DuckRace/conf/student-ids.csv"));
+            /*
+             *For each line (string), we need go split it into 'tokens' based on the comma
+             * 1,Amir
+             */
+            for (String line : lines){
+                String[] tokens = line.split(",");
+//                //return from the array ["1","Amir"]
+//                Integer studentId = Integer.parseInt(tokens[0]);
+//                String studentName = tokens[1];
+                //putting into idMap and put it back to those who called
+                idMap.put(Integer.parseInt(tokens[0]),tokens[1]); //one line, shorter, clean code
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return idMap;
+    }
 
 }

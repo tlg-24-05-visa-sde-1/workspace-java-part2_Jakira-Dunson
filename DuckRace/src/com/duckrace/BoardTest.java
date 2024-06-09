@@ -11,5 +11,7 @@ public class BoardTest {
         board.updateBoard(9,Reward.PRIZES);
 
         board.dumpRacerMap();
+
+        board.show();
     }
 }

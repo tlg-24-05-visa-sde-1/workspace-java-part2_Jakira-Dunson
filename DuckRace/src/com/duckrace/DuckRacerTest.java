@@ -15,5 +15,6 @@ public class DuckRacerTest {
         Collection<Reward> rewards = racerOne.getRewards();
         System.out.println(rewards);
 
+
     }
 }

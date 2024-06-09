@@ -3,10 +3,7 @@ package com.duckrace;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /*
  * This is a lookup table of ids to student names.
@@ -66,10 +63,19 @@ class Board {
         System.out.println(racerMap);
     }
 
-
     //TESTING PURPOSES ONLY
     void dumpStudentIdMap(){
         System.out.println(studentIdMap);
+    }
+    /*
+    * This show the data to the human user
+    * We need to show the right side of the map, ideally in an attractive way.
+    */
+    public void show(){
+        Collection<DuckRacer> racers= racerMap.values();
+        for (DuckRacer duckRacer : racers) {
+            System.out.println(duckRacer);
+        }
     }
     /*
     * Populates studentIdMap from file conf/student-ids.csv
@@ -95,8 +101,6 @@ class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return idMap;
     }
 

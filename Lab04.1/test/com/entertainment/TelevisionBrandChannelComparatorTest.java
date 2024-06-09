@@ -17,19 +17,19 @@ public class TelevisionBrandChannelComparatorTest {
 
     @Test
     public void testCompare() throws InvalidChannelException {  // throws clause needed because it's an unhandled checked exception
-        Television tv1 = new Television("RCA");
-        Television tv2 = new Television("Sony");
+        Television television = new Television("RCA");
+        Television television1 = new Television("Sony");
 
-        assertTrue(comparator.compare(tv1, tv2) < 0);  // RCA < Sony
+        assertTrue(comparator.compare(television, television1) < 0);  // RCA < Sony
 
         // if same brand, then compare channel
-        tv2.setBrand("RCA");    // now they have the same brand
-        tv1.changeChannel(50);  // but tv1's channel is lower
-        tv2.changeChannel(60);
+        television1.setBrand("RCA");    // now they have the same brand
+        television.changeChannel(50);  // but television's channel is lower
+        television1.changeChannel(60);
 
-        assertTrue(comparator.compare(tv1, tv2) < 0);  // RCA = RCA, 50 < 60
+        assertTrue(comparator.compare(television, television1) < 0);  // RCA = RCA, 50 < 60
 
-        tv2.changeChannel(50);  // now all properties are the same
-        assertTrue(comparator.compare(tv1, tv2) == 0); // RCA = RCA, 50 = 50
+        television1.changeChannel(50);  // now all properties are the same
+        assertTrue(comparator.compare(television, television1) == 0); // RCA = RCA, 50 = 50
     }
 }

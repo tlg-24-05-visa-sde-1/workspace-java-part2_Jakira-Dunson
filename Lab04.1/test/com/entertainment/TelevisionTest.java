@@ -15,13 +15,13 @@ public class TelevisionTest {
 
     @Test
     public void testSetVolume() {
-        Television tv = new Television();
+        Television television = new Television();
 
-        tv.setVolume(0);    // valid volume, min value
-        assertEquals(0, tv.getVolume());
+        television.setVolume(0);    // valid volume, min value
+        assertEquals(0, television.getVolume());
 
-        tv.setVolume(100);  // valid volume, max value
-        assertEquals(100, tv.getVolume());
+        television.setVolume(100);  // valid volume, max value
+        assertEquals(100, television.getVolume());
     }
 
     /**
@@ -32,10 +32,10 @@ public class TelevisionTest {
      */
     @Test
     public void testSetVolumeIllegalArgumentException() {
-        Television tv = new Television();
+        Television television = new Television();
 
         try {
-            tv.setVolume(-1);  // if method works correctly, exception is thrown and control jumps to catch block
+            television.setVolume(-1);  // if method works correctly, exception is thrown and control jumps to catch block
             fail("Should have thrown IllegalArgumentException");
         }
         catch (IllegalArgumentException e) {
@@ -43,7 +43,7 @@ public class TelevisionTest {
         }
 
         try {
-            tv.setVolume(101); // if method works correctly, exception is thrown and control jumps to catch block
+            television.setVolume(101); // if method works correctly, exception is thrown and control jumps to catch block
             fail("Should have thrown IllegalArgumentException");
         }
         catch (IllegalArgumentException e) {
@@ -53,13 +53,13 @@ public class TelevisionTest {
 
     @Test
     public void testChangeChannel() throws InvalidChannelException {  // throws clause needed because it's an unhandled checked exception
-        Television tv = new Television();
+        Television television = new Television();
 
-        tv.changeChannel(1);    // valid channel, min value
-        assertEquals(1, tv.getCurrentChannel());
+        television.changeChannel(1);    // valid channel, min value
+        assertEquals(1, television.getCurrentChannel());
 
-        tv.changeChannel(999);  // valid channel, max value
-        assertEquals(999, tv.getCurrentChannel());
+        television.changeChannel(999);  // valid channel, max value
+        assertEquals(999, television.getCurrentChannel());
     }
 
     /**
@@ -72,45 +72,45 @@ public class TelevisionTest {
      */
     @Test(expected=InvalidChannelException.class)
     public void testChangeChannelInvalidChannelException_LowerBound() throws InvalidChannelException {  // unhandled checked exception
-        Television tv = new Television();
-        tv.changeChannel(0);
-        tv.changeChannel(1000);  // WRONG: this is never reached, need another test method (see next test method)
+        Television television = new Television();
+        television.changeChannel(0);
+        television.changeChannel(1000);  // WRONG: this is never reached, need another test method (see next test method)
     }
 
     @Test(expected=InvalidChannelException.class)
     public void testChangeChannelInvalidChannelException_UpperBound() throws InvalidChannelException {  // unhandled checked exception
-        Television tv = new Television();
-        tv.changeChannel(1000);
+        Television television = new Television();
+        television.changeChannel(1000);
     }
 
     @Test
     public void testEquals() {  // brand, volume, display
-        Television tv1 = new Television("RCA", 10, DisplayType.LED);
-        Television tv2 = new Television("RCA", 10, DisplayType.LED);
-        assertEquals(tv1, tv2);
-        assertEquals(tv2, tv1);
+        Television television = new Television("RCA", 10, DisplayType.LED);
+        Television television1 = new Television("RCA", 10, DisplayType.LED);
+        assertEquals(television, television1);
+        assertEquals(television1, television);
 
-        tv2.setBrand("X");
-        assertNotEquals(tv1, tv2);
+        television1.setBrand("X");
+        assertNotEquals(television, television1);
     }
 
     @Test
     public void testHashCode() {  // brand, volume, display
-        Television tv1 = new Television("RCA", 10, DisplayType.LED);
-        Television tv2 = new Television("RCA", 10, DisplayType.LED);
+        Television television = new Television("RCA", 10, DisplayType.LED);
+        Television television1 = new Television("RCA", 10, DisplayType.LED);
         // equal objects must have equal hashcodes
-        assertEquals(tv1.hashCode(), tv2.hashCode());
+        assertEquals(television.hashCode(), television1.hashCode());
     }
 
     @Test
     public void testCompareTo() { // natural order defined by brand only
-        Television tv1 = new Television("RCA");
-        Television tv2 = new Television("Sony");
-        Television tv3 = new Television("Zenith");
-        assertTrue(tv1.compareTo(tv2) < 0);  // RCA < Sony
-        assertTrue(tv3.compareTo(tv2) > 0);  // Zenith > Sony
+        Television television = new Television("RCA");
+        Television television1 = new Television("Sony");
+        Television television2 = new Television("Zenith");
+        assertTrue(television.compareTo(television1) < 0);  // RCA < Sony
+        assertTrue(television2.compareTo(television1) > 0);  // Zenith > Sony
 
-        tv2.setBrand("RCA");
-        assertTrue(tv1.compareTo(tv2) == 0); // RCA = RCA
+        television1.setBrand("RCA");
+        assertTrue(television.compareTo(television1) == 0); // RCA = RCA
     }
 }

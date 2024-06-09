@@ -18,33 +18,33 @@ public class CatalogTest {
 
     @Test
     public void findByBrands_shouldReturnPopulatedMap_brandsPassed() {
-        Map<String,Collection<Television>> tvMap = Catalog.findByBrands("Sony", "NOT-FOUND");
+        Map<String,Collection<Television>> televisionMap = Catalog.findByBrands("Sony", "NOT-FOUND");
 
-        assertEquals(2, tvMap.size());
+        assertEquals(2, televisionMap.size());
 
-        Collection<Television> sonyTvs = tvMap.get("Sony");
+        Collection<Television> sonyTvs = televisionMap.get("Sony");
         assertEquals(7, sonyTvs.size());
         for (Television tv : sonyTvs) {
             assertEquals("Sony", tv.getBrand());
         }
 
-        Collection<Television> notFoundTvs = tvMap.get("NOT-FOUND");
+        Collection<Television> notFoundTvs = televisionMap.get("NOT-FOUND");
         assertTrue(notFoundTvs.isEmpty());
     }
 
     @Test
     public void findByBrands_shouldReturnEmptyMap_noBrandsPassed() {
-        Map<String,Collection<Television>> tvMap = Catalog.findByBrands();
+        Map<String,Collection<Television>> televisionMap = Catalog.findByBrands();
 
-        assertTrue(tvMap.isEmpty());
+        assertTrue(televisionMap.isEmpty());
     }
 
     @Test
     public void findByBrand_shouldReturnPopulatedCollection_brandFound() {
-        Collection<Television> tvs = Catalog.findByBrand("Sony");
+        Collection<Television> televisions = Catalog.findByBrand("Sony");
 
-        assertEquals(7, tvs.size());
-        for (Television tv : tvs) {
+        assertEquals(7, televisions.size());
+        for (Television tv : televisions) {
             assertEquals("Sony", tv.getBrand());
         }
     }
@@ -54,8 +54,8 @@ public class CatalogTest {
      */
     @Test
     public void findByBrand_shouldReturnEmptyCollection_brandNotFound() {
-        Collection<Television> tvs = Catalog.findByBrand("NO-MATCHES");
-        assertNotNull(tvs);
-        assertTrue(tvs.isEmpty());
+        Collection<Television> televisions = Catalog.findByBrand("NO-MATCHES");
+        assertNotNull(televisions);
+        assertTrue(televisions.isEmpty());
     }
 }

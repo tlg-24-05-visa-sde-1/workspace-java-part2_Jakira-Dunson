@@ -38,7 +38,7 @@ import java.util.*;
  *   17       17    Dom        1    DEBIT_CARD
  */
 
-class Board {
+public class Board {
     private final Map<Integer,String> studentIdMap = loadStudentIdMap();
     private final Map<Integer,DuckRacer> racerMap  = new TreeMap<>();
 
@@ -87,7 +87,7 @@ class Board {
     * Populates studentIdMap from file conf/student-ids.csv
     */
 
-    private Map<Integer, String> loadStudentIdMap() {
+    public Map<Integer, String> loadStudentIdMap() {
         Map<Integer, String> idMap = new HashMap<>();
 
         try {

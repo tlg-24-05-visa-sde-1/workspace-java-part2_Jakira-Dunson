@@ -1,7 +1,9 @@
-package com.duckrace;
+package com.duckrace.app;
+
+import com.duckrace.Board;
+import com.duckrace.Reward;
 
 import java.util.Scanner;
-import static com.duckrace.Reward.*;
 
 /*
  * Application Controller.
@@ -31,17 +33,17 @@ public class DuckRaceApp {
         while (!validInput){
             System.out.print("Please enter a [D]ebit card or [P]rizes: ");
             String input = scanner.nextLine().trim().toUpperCase();
-            if (input.equals("D|P")) {
+            if (input.matches("D|P")) {
                 validInput = true;
                 //ternary (Condition, True value
                 //the false value
-                reward = (input.equals("D")) ? DEBIT_CARD : PRIZES;
+                //reward = (input.equals("D")) ? DEBIT_CARD : PRIZES;
             }
-//            if (input.equals("D")) {
-//                reward = Reward.DEBIT_CARD;
-//            } else {
-//                reward = Reward.PRIZES;
-//            }
+            if (input.equals("D")) {
+                reward = Reward.DEBIT_CARD;
+            } else {
+                reward = Reward.PRIZES;
+            }
         }
         return reward;
     }
@@ -60,13 +62,11 @@ public class DuckRaceApp {
                 }
             }
         }
-
         return id;
     }
 
     private void showBoard() {
         board.show();
-
     }
 
     private void welcome() {

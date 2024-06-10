@@ -46,7 +46,9 @@ public class WildcardTest {
      * that's the Principle of Substitutability and IS-A.
      * BUT WAIT: is Collection<Double> a subclass of Collection<Number> ???
      */
-    private double sum(Collection<Number> values) {
+    private double sum(Collection<? extends Number> values) {
+        //? represents anything that is a number
+        //takes a collection of anything, as long as that thing is a number
         double sum = 0.0;
         for (Number number : values) {
             sum = sum + number.doubleValue();

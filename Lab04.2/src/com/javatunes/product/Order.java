@@ -23,6 +23,8 @@ public class Order {
      * get cart total and print
      */
     public void processCart(ShoppingCart<? extends Product> cart) {
+        //method signature can also be written this way
+        //public <T extends Product> void processCart(ShoppingCart<T> cart)
         System.out.println("Order " + getId() + " contains the following: ");
 
         for(Product product : cart.allItems()){

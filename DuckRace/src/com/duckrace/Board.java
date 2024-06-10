@@ -48,7 +48,18 @@ class Board {
      * or we might need to  creat a new DuckRacer, put it in the map,
      * and then make it win.
      */
-    public void updateBoard(int id, Reward reward){
+    public void show() {
+        if (racerMap.isEmpty()) {
+            System.out.println("No results to show");
+        } else {
+            Collection<DuckRacer> racers = racerMap.values();
+            for (DuckRacer duckRacer : racers) {
+                System.out.println(duckRacer);
+            }
+        }
+    }
+
+        public void updateBoard(int id, Reward reward){
         if (racerMap.containsKey(id)){ //fetch existing DuckRacer
             DuckRacer duckRacer = racerMap.get(id);
             duckRacer.win(reward);
@@ -71,12 +82,7 @@ class Board {
     * This show the data to the human user
     * We need to show the right side of the map, ideally in an attractive way.
     */
-    public void show(){
-        Collection<DuckRacer> racers= racerMap.values();
-        for (DuckRacer duckRacer : racers) {
-            System.out.println(duckRacer);
-        }
-    }
+
     /*
     * Populates studentIdMap from file conf/student-ids.csv
     */

@@ -1,6 +1,7 @@
 package com.duckrace;
 
 import java.util.Scanner;
+import static com.duckrace.Reward.*;
 
 /*
  * Application Controller.
@@ -32,12 +33,15 @@ public class DuckRaceApp {
             String input = scanner.nextLine().trim().toUpperCase();
             if (input.equals("D|P")) {
                 validInput = true;
+                //ternary (Condition, True value
+                //the false value
+                reward = (input.equals("D")) ? DEBIT_CARD : PRIZES;
             }
-            if (input.equals("D")) {
-                reward = Reward.DEBIT_CARD;
-            } else {
-                reward = Reward.PRIZES;
-            }
+//            if (input.equals("D")) {
+//                reward = Reward.DEBIT_CARD;
+//            } else {
+//                reward = Reward.PRIZES;
+//            }
         }
         return reward;
     }
@@ -47,7 +51,7 @@ public class DuckRaceApp {
 
         boolean validIput = false;
         while (!validIput) {
-            System.out.println("Please enter a valid ID");
+            System.out.println("Please enter a valid ID [1-16]");
             String input = scanner.nextLine();
             if (input.matches("\\d{1,2}")) { //any digit, one or two times
                 id = Integer.parseInt(input);

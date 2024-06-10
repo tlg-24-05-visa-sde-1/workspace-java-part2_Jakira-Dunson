@@ -36,6 +36,8 @@ public class DuckRaceApp {
     }
 
     private void showBoard() {
+        board.show();
+
     }
 
     private void welcome() {

@@ -48,6 +48,20 @@ public class Board {
      * or we might need to  creat a new DuckRacer, put it in the map,
      * and then make it win.
      */
+
+    public void update(int id, Reward reward) {
+        DuckRacer racer = null;
+
+        if (racerMap.containsKey(id)) {  // fetch existing DuckRacer
+            racer = racerMap.get(id);
+        }
+        else {                           // create new DuckRacer
+            racer = new DuckRacer(id, studentIdMap.get(id));
+            racerMap.put(id, racer);     // easy to forget this step
+        }
+        racer.win(reward);
+    }
+
     public void show() {
         if (racerMap.isEmpty()) {
             System.out.println("No results to show");

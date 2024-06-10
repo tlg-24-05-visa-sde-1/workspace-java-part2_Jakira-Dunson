@@ -26,6 +26,10 @@ public class DuckRaceApp {
 
     }
 
+    private void updateBoard(int id, Reward reward) {
+        board.update(id, reward);
+    }
+
     private Reward promptForRewrd() {
         Reward reward = null;
 

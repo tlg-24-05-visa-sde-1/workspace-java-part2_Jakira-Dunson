@@ -25,7 +25,7 @@ public class EuropeTax implements TaxCalculator {
         double vat = taxable * VAT_RATE;
         double luxury = 0;
         if (taxable > LUXURY_FREE_AMOUNT) {
-            luxury = (taxable * LUXURY_FREE_AMOUNT) * LUXURY_RATE;
+            luxury = (taxable - LUXURY_FREE_AMOUNT) * LUXURY_RATE;
         }
         return vat + luxury;
     }

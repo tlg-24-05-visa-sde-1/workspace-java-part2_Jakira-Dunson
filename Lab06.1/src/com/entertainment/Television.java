@@ -8,6 +8,7 @@
  */
 package com.entertainment;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Television implements Comparable<Television> {
@@ -19,7 +20,7 @@ public class Television implements Comparable<Television> {
     private String brand;
     private int volume;
     private DisplayType display;
-    private Tuner tuner = new Tuner();  // set up internally and used for channel management
+    private final Tuner tuner = new Tuner();  // set up internally and used for channel management
 
     public Television() {
     }
@@ -109,13 +110,43 @@ public class Television implements Comparable<Television> {
         if (obj instanceof Television) {
             Television other = (Television) obj;
             result = Objects.equals(this.getBrand(), other.getBrand()) &&
-                     Objects.equals(this.getVolume(), other.getVolume()) &&
-                     Objects.equals(this.getDisplay(), other.getDisplay());
+                    Objects.equals(this.getVolume(), other.getVolume()) &&
+                    Objects.equals(this.getDisplay(), other.getDisplay());
         }
         return result;
     }
 
-    //MEMBER - LEVEL NAMED INNER CLASSES
+    // STATIC NESTED CLASSES - these are all referenced as Television. (dot) something
+    // Outside this class (Television), DisplayType is still visible (it's public)
+    // However, it's name is now Television.DisplayType
+    public static enum DisplayType {
+        LCD, LED, OLED, PLASMA, CRT
+    }
+
+    // Outside this class (Television), this is called Television.ChannelComparator
+    public static class ChannelComparator implements Comparator<Television> {
+
+        @Override
+        public int compare(Television tv1, Television tv2) {
+            return Integer.compare(tv1.getCurrentChannel(), tv2.getCurrentChannel());
+        }
+    }
+
+    // Outside this class (Television), this is called Television.BrandChannelComparator
+    public static class BrandChannelComparator implements Comparator<Television> {
+
+        @Override
+        public int compare(Television tv1, Television tv2) {
+            int result = tv1.getBrand().compareTo(tv2.getBrand());
+
+            if (result == 0) {
+                result = Integer.compare(tv1.getCurrentChannel(), tv2.getCurrentChannel());
+            }
+            return result;
+        }
+    }
+
+    // MEMBER-LEVEL NAMED INNER CLASSES
     private class Tuner {
         private int channel = 3;  // default channel for cable and satellite customers
 

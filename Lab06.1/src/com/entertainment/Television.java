@@ -44,6 +44,9 @@ public class Television implements Comparable<Television> {
         setDisplay(display);
     }
 
+    public Television(String rca, int volume, com.entertainment.DisplayType displayType) {
+    }
+
     public String getBrand() {
         return this.brand;
     }

@@ -1,9 +1,6 @@
 package com.duckrace;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -41,9 +38,8 @@ import java.util.*;
  *   17       17    Dom        1    DEBIT_CARD
  */
 
-public class Board {
-    private static final String DATA_FILE_PATH = "DuckRace/data/board.dat";
-    private static final String STUDENT_ID_FILE_PATH = "DuckRace/conf/student-ids.csv";
+public class Board implements Serializable {
+
     /*
      * Read from binary file data/ board.dat or create new board (if file is not there)
      * NOTE: new Board object is created only when the first time the app is run
@@ -51,31 +47,34 @@ public class Board {
 
     public static Board getInstance() {
         Board board = null;
-        if(Files.exists(Path.of(DATA_FILE_PATH) )){
-            try (ObjectInputStream in = new ObjectInputStream
-                    (Files.newInputStream(Path.of(DATA_FILE_PATH)))){
-                board = (Board) in.readObject();
 
-            } catch (Exception e){
+        if (Files.exists(Path.of(DATA_FILE_PATH))) {
+            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DATA_FILE_PATH))) {
+                board = (Board) in.readObject();
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
-
-        }else { //only happens the first time
+        }
+        else {  // only happens the *very first time* we run the app (because the file isn't there)
             board = new Board();
         }
         return board;
     }
+
+    private static final String DATA_FILE_PATH = "DuckRace/data/board.dat";
+    private static final String STUDENT_ID_FILE_PATH = "DuckRace/conf/student-ids.csv";
     /*
-    * Writes 'this' Board object to binary file data/board.dat
-    * In more detail, we are using Java's built-in Object Serialization facility
-    * to write the state of this object to the file
-    */
+     * Writes 'this' Board object to binary file data/board.dat
+     * In more detail, we are using Java's built-in Object Serialization facility
+     * to write the state of this object to the file
+     */
 
-    private void save(){
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DATA_FILE_PATH))){
-            out.writeObject(this); //write 'me' (I am the board object) to the file (as dust)
-
-        } catch (Exception e){
+    private void save() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DATA_FILE_PATH))) {
+            out.writeObject(this);  // write "me" (I am a Board object) to the file (as dust)
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -89,27 +88,48 @@ public class Board {
      * and then make it win.
      */
 
+    Board() {
+    }
+
     public void update(int id, Reward reward) {
         DuckRacer racer = null;
 
         if (racerMap.containsKey(id)) {  // fetch existing DuckRacer
             racer = racerMap.get(id);
-        } else {                           // create new DuckRacer
+        }
+        else {                           // create new DuckRacer
             racer = new DuckRacer(id, studentIdMap.get(id));
             racerMap.put(id, racer);     // easy to forget this step
         }
         racer.win(reward);
+        save();
     }
+
 
     public void show() {
         if (racerMap.isEmpty()) {
-            System.out.println("No results to show");
-        } else {
-            Collection<DuckRacer> racers = racerMap.values();
-            for (DuckRacer duckRacer : racers) {
-                System.out.println(duckRacer);
-            }
+            System.out.println("There are currently no results to show\n");
         }
+        else {
+            StringBuilder board = new StringBuilder("\n");
+            board.append("Duck Race Results\n");
+            board.append("id    name      wins    rewards\n");
+            board.append("--    ----      ----    -------\n");
+
+            for (DuckRacer racer : racerMap.values()) {
+                String rewardsString = racer.getRewards().toString();
+                String rewards = rewardsString.substring(1, rewardsString.length() - 1);
+
+                String row = String.format("%2d    %-9s %4d    %s\n",
+                        racer.getId(), racer.getName(), racer.getWins(), rewards);
+                board.append(row);
+            }
+            System.out.println(board);
+        }
+    }
+
+    public int maxId() {
+        return studentIdMap.size();
     }
 
     public void updateBoard(int id, Reward reward) {
@@ -122,6 +142,8 @@ public class Board {
             racer.win(reward);
         }
     }
+
+
 
     //TESTING PURPOSES  ONLY
     void dumpRacerMap() {
